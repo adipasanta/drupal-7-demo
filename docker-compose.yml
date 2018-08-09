@@ -16,6 +16,7 @@ services:
       - 8080:80
     volumes:
       - ./app:/app
+      - ./install:/install
     restart: always
 volumes:
   db_data:
