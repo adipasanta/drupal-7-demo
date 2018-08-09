@@ -4,7 +4,4 @@ composer create-project drupal-composer/drupal-project:7.x-dev /app --stability 
 mkdir -p /app/config/sync && \
 chown -R www-data:www-data /app/web && \
 composer update drupal/core --with-dependencies && \
-composer require drupal/console:~1.0 \
---prefer-dist \
---optimize-autoloader && \
 drush updb

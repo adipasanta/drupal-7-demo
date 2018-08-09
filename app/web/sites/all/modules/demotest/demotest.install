@@ -1,0 +1,82 @@
+<?php
+/**
+ * Implements hook_install().
+ */
+function demotest_install() {
+    node_types_rebuild();
+    $types = node_type_get_types();
+    node_add_body_field($types['demotest']);
+    add_custom_fields();
+}
+
+/**
+ * Implements hook_uninstall().
+ */
+function demotest_uninstall() {
+    $type = 'byline';
+    $sql = 'SELECT nid FROM {node} n WHERE n.type = :type';
+    $result = db_query($sql, ['type' => $type]);
+    $nodeids = [];
+    foreach ($result as $row) {
+        $nodeids[] = $row->nid;
+    }
+    node_delete_multiple($nodeids);
+    delete_custom_fields();
+    // node_type_delete($type);
+    field_purge_batch(500);
+}
+
+function _demotest_installed_fields() {
+    $t = get_t();
+    return [
+        'demotestcustomtype_title' => [
+            'field_name' => 'demotestcustomtype_title',
+            'label' => $t('Title custom field'),
+            'type' => 'text',
+        ],
+    ];
+}
+
+function _demotest_installed_instances() {
+    $t = get_t();
+    return [
+        'demotestcustomtype_title' => [
+            'field_name' => 'demotestcustomtype_title',
+            'type' => 'text',
+            'label' => $t('Title custom field'),
+            'widget' => [
+                'type' => 'text_textfield',
+            ],
+            'display' => [
+                'example_node_list' => [
+                    'label' => $t('Title custom field'),
+                    'type' => 'text',
+                ]
+            ]
+        ],
+    ];
+}
+
+function add_custom_fields() {
+    foreach (_demotest_installed_fields() as $field) {
+        field_create_field($field);
+    }
+
+    foreach (_demotest_installed_instances() as $instance) {
+        $instance['entity_type'] = 'node';
+        $instance['bundle'] = 'demotest';
+        print_r($instance);
+        field_create_instance($instance);
+    }
+}
+
+function delete_custom_fields() {
+    foreach (array_keys(_demotest_installed_fields()) as $field) {
+        field_delete_field($field);
+    }
+
+    $instances = field_info_instances('node', 'demotest');
+    foreach ($instances as $instance) {
+        field_delete_instance($instance);
+    }
+}

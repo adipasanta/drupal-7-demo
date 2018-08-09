@@ -1,0 +1,22 @@
+<?php
+/**
+ * Implements hook_node_info()
+ */
+function demotest_node_info() {
+    return [
+        'demotest' => [
+            'name' => t('By Line'),
+            'base' => 'demotest',
+            'description' => t('Demo Test By Line Custom Type'),
+            'has_title' => true,
+            'title_label' => t('By Line title'),
+        ],
+    ];
+}
+
+/**
+ * Implements hook_form()
+ */
+function demotest_form($node, $form_state) {
+    return node_content_form($node, $form_state);
+}

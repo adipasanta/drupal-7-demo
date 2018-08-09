@@ -1,0 +1,7 @@
+name = Demo Test
+description = Drupal 7 Demo Test
+package = Demo
+core = 7.x
+dependencies[] = drupal:system (>= 7.40)
+files[] = demotest.install
+files[] = demotest.module
