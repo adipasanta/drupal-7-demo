@@ -29,10 +29,11 @@ function demotest_uninstall() {
 function _demotest_installed_fields() {
     $t = get_t();
     return [
-        'demotestcustomtype_title' => [
-            'field_name' => 'demotestcustomtype_title',
-            'label' => $t('Title custom field'),
-            'type' => 'text',
+        'demotest_image' => [
+            'field_name' => 'demotest_image',
+            'label' => $t('Image custom field'),
+            'type'       => 'image',
+            'cardinality' => 2,
         ],
     ];
 }
@@ -40,19 +41,20 @@ function _demotest_installed_fields() {
 function _demotest_installed_instances() {
     $t = get_t();
     return [
-        'demotestcustomtype_title' => [
-            'field_name' => 'demotestcustomtype_title',
-            'type' => 'text',
-            'label' => $t('Title custom field'),
-            'widget' => [
-                'type' => 'text_textfield',
+		'demotest_image' => [
+			'field_name'  => 'demotest_image',
+			'label'       => t('Upload an image:'),
+			'required'    => FALSE,
+			'widget' => [
+				'type'    => 'image_image',
+				'weight'  => 2.10,
             ],
-            'display' => [
-                'example_node_list' => [
-                    'label' => $t('Title custom field'),
-                    'type' => 'text',
-                ]
-            ]
+			'display' => [
+				'example_node_list' => [
+					'label' => 'hidden',
+					'type' => 'image_link_content__thumbnail',
+                ],
+            ],
         ],
     ];
 }
