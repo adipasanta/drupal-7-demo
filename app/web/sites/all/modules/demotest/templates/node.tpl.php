@@ -77,6 +77,7 @@
  * @see template_preprocess_node()
  * @see template_process()
  */
+drupal_add_css(drupal_get_path('module', 'demotest') . '/templates/style/custom.css');
 ?>
 <div id="node-<?php print $node->nid; ?>" class="<?php print $classes; ?> clearfix"<?php print $attributes; ?>>
 
@@ -90,16 +91,46 @@
 
   <?php if ($display_submitted): ?>
     <div class="meta submitted">
-      <?php print $user_picture; ?>
       <?php
 $demoTest1 = <<< eof
-        <div class="demotest-byline__container">
-            <div class="demotest-byline__children">
+        <div class="by-line__container-inline">
+            <div class="by-line__author">
                 By
 eof;
-        $submitted_modified = $submitted;
+$demoTest2_a = <<< eof
+</a>
+            </div>
+            <div class="by-line__picture">
+                $user_picture
+            </div>
+            <div class="by-line__date">
+                on
+eof;
+$demoTest2_span = <<< eof
+</span>
+            </div>
+            <div class="by-line__picture">
+                $user_picture
+            </div>
+            <div class="by-line__date">
+                on
+eof;
+$demoTest3 = <<< eof
+            </div>
+        </div>
+    </span>
+eof;
+        $submitted_modified = $submitted.'++';
         if (strpos($submitted_modified, 'Submitted by') !== false) {
-            $submitted_modified = str_replace('Submitted by', $demoTest1, $submitted_modified);
+          $submitted_modified = str_replace('Submitted by', $demoTest1, $submitted_modified);
+        }
+        if (strpos($submitted_modified, '</span> on') !== false) {
+          $submitted_modified = str_replace('</span> on', $demoTest2_span, $submitted_modified);
+        } elseif (strpos($submitted_modified, '</a> on') !== false) {
+          $submitted_modified = str_replace('</a> on', $demoTest2_a, $submitted_modified);
+        }
+        if (strpos($submitted_modified, '</span>++') !== false) {
+          $submitted_modified = str_replace('</span>++', $demoTest3, $submitted_modified);
         }
         print $submitted_modified;
       ?>

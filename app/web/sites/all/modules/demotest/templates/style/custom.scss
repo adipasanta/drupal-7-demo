@@ -1,0 +1,28 @@
+.by-line__container-inline {
+    display: inline-block;
+    width: 100%;
+    font-size: 2em;
+
+    %items {
+        float: left;
+    }
+
+    .by-line__author {
+        @extend %items;
+        width: 30%;
+    }
+
+    .by-line__picture {
+        @extend %items;
+        width: 20%;
+
+        .user-picture img {
+            height: 40px;
+        }
+    }
+
+    .by-line__date {
+        @extend %items;
+        width: 50%;
+    }
+}

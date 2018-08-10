@@ -1,0 +1,16 @@
+.by-line__container-inline {
+  display: inline-block;
+  width: 100%;
+  font-size: 2em; }
+  .by-line__container-inline .by-line__author, .by-line__container-inline .by-line__picture, .by-line__container-inline .by-line__date {
+    float: left; }
+  .by-line__container-inline .by-line__author {
+    width: 30%; }
+  .by-line__container-inline .by-line__picture {
+    width: 20%; }
+    .by-line__container-inline .by-line__picture .user-picture img {
+      height: 40px; }
+  .by-line__container-inline .by-line__date {
+    width: 50%; }
+
+/*# sourceMappingURL=custom.css.map */
