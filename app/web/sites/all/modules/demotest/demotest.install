@@ -29,6 +29,14 @@ function demotest_uninstall() {
 function _demotest_installed_fields() {
     $t = get_t();
     return [
+        'demotest_body' => [
+            'field_name'  => 'demotest_body',
+            'cardinality' => 1,
+            'type'        => 'text',
+            'settings'    => [
+                'max_length' => 500,
+            ],
+        ],
         'demotest_image' => [
             'field_name' => 'demotest_image',
             'label' => $t('Image custom field'),
@@ -41,7 +49,14 @@ function _demotest_installed_fields() {
 function _demotest_installed_instances() {
     $t = get_t();
     return [
-		'demotest_image' => [
+        'demotest_body' => [
+            'field_name' => 'demotest_body',
+            'label'       => $t('Demotest Body'),
+            'widget'      => [
+                'type'    => 'text_textarea',
+            ],
+        ],
+        'demotest_image' => [
 			'field_name'  => 'demotest_image',
 			'label'       => t('Upload an image:'),
 			'required'    => FALSE,
